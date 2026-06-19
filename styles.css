@@ -206,9 +206,24 @@ h1, h2, h3, h4 {
 .marquee-track img:hover { opacity: 0.9; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
-/* ============ Ecosystem ============ */
-.ecosystem { padding: 6rem 0; }
-.ecosystem-img { width: min(620px, 100%); margin-inline: auto; }
+/* ============ Ecosystem (light contrast band) ============ */
+.ecosystem {
+  background: #eceef3;
+  padding: 5.5rem 0;
+  margin: 2rem 0;
+}
+.ecosystem .container {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+.ecosystem .section-title {
+  text-align: left;
+  color: #0b1116;
+  margin-bottom: 0;
+}
+.ecosystem-img { width: min(560px, 100%); margin-inline: auto; }
 
 /* ============ Testimonial ============ */
 .testimonial { padding: 6rem 0; text-align: center; }
@@ -359,6 +374,8 @@ h1, h2, h3, h4 {
   .features-grid { grid-template-columns: 1fr 1fr; }
   .slide { grid-template-columns: 1fr; }
   .slide img { max-height: 260px; min-height: 0; }
+  .ecosystem .container { grid-template-columns: 1fr; gap: 1.5rem; }
+  .ecosystem .section-title { text-align: center; }
 }
 @media (max-width: 640px) {
   .main-nav a:not(.btn) { display: none; }
@@ -370,4 +387,4 @@ h1, h2, h3, h4 {
   .contact-form { padding: 1.6rem; }
   .footer-bottom { justify-content: center; text-align: center; }
 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                          
