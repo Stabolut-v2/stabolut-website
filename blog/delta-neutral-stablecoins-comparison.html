@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Delta-Neutral Stablecoins Compared — Stabolut</title>
+  <meta name="description" content="Delta-neutral stablecoins compared: Ethena vs Resolv vs Stabolut USB. Complete analysis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#000;--surface:rgba(255,255,255,.035);--border:rgba(255,255,255,.09);--text:#f6f8f9;--muted:#8c9aa3;--acc:#ff8a2a;--blue:#4ea8e6;--display:'Space Grotesk',system-ui,sans-serif;--font:'Inter',system-ui,sans-serif}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+    .container{width:min(680px,90%);margin-inline:auto;padding:48px 0}
+    .back{color:var(--muted);font-size:14px;text-decoration:none;display:inline-block;margin-bottom:32px}
+    .back:hover{color:var(--acc)}
+    h1{font-family:var(--display);font-size:clamp(28px,4vw,40px);font-weight:700;line-height:1.2;margin-bottom:12px}
+    .meta{color:var(--muted);font-size:14px;margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+    h2{font-family:var(--display);font-size:24px;font-weight:600;margin:36px 0 12px}
+    p{margin-bottom:16px;color:rgba(255,255,255,.8)}
+    ul{margin:0 0 16px 24px;color:rgba(255,255,255,.8);list-style:none;padding:0}
+    li{margin-bottom:10px;padding:12px 16px;background:rgba(255,255,255,.035);border-radius:12px;border:1px solid var(--border)}
+    li strong{display:block;margin-bottom:4px;color:var(--acc)}
+    li span{font-size:14px;color:var(--muted);display:block}
+    strong{color:var(--text)}
+    footer{text-align:center;margin-top:60px;padding:32px 0;border-top:1px solid var(--border)}
+    footer a{color:var(--muted);font-size:14px;margin:0 12px;text-decoration:none}
+    footer a:hover{color:var(--acc)}
+  </style>
+</head>
+<body>
+<div class="container">
+  <a class="back" href="../blog">&larr; Back to Blog</a>
+  <h1>Delta-Neutral Stablecoins Compared:<br>Ethena, Resolv, Stabolut USB</h1>
+  <div class="meta">June 2026 &middot; 7 min read &middot; Delta-Neutral, Stablecoins, Comparison</div>
+
+  <h2>What Is a Delta-Neutral Stablecoin?</h2>
+  <p>Delta-neutral stablecoins hold a long position in a volatile asset plus a matching short in perpetual futures. The long and short cancel out, leaving only the funding rate yield.</p>
+
+  <h2>How It Works</h2>
+  <ol>
+    <li>Deposit BTC/ETH as collateral</li>
+    <li>Mint stablecoins</li>
+    <li>Short perpetual futures to hedge</li>
+    <li>Collect funding rate payments as yield</li>
+  </ol>
+
+  <h2>Comparison</h2>
+  <ul>
+    <li><strong>Ethena (USDe)</strong><span>$6B+ market cap. ETH/BTC on Binance, Bybit, OKX. Off-exchange settlement via Copper/Ceffu. Variable 5-25% APY.</span></li>
+    <li><strong>Resolv (USR)</strong><span>Modular collateral pool. RLP insurance tranche. ETH/BTC delta-neutral clusters. Focus on risk-adjusted returns.</span></li>
+    <li><strong>Stabolut (USB)</strong><span>Bitcoin+Ether backed on Arbitrum. Yield via Aave lending. Self-custody. On-chain proof of reserves. Sustainable, predictable yield.</span></li>
+  </ul>
+
+  <h2>Key Differences</h2>
+  <ul>
+    <li><strong>Custody</strong><span>Ethena uses off-exchange settlement (Copper/Ceffu). Resolv uses custodians. Stabolut USB is fully self-custodied in smart contracts on Arbitrum.</span></li>
+    <li><strong>Yield Source</strong><span>Ethena relies on funding rates (variable). Resolv uses diverse yield. Stabolut uses Aave lending — more predictable and sustainable.</span></li>
+    <li><strong>Transparency</strong><span>Stabolut provides real-time on-chain proof of reserves. No opaque custodial structures.</span></li>
+  </ul>
+
+  <footer>
+    <a href="https://stabolut.com">Home</a>
+    <a href="../blog">Blog</a>
+    <a href="https://github.com/Stabolut-v2">GitHub</a>
+  </footer>
+</div>
+</body>
+</html>
