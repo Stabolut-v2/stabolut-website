@@ -153,8 +153,7 @@ h1, h2, h3, h4 {
 
 /* ============ Meet ============ */
 .meet { padding: 8rem 0 3rem; }
-.meet-usb-logo { display: flex; justify-content: flex-start; margin-bottom: 2rem; }
-.meet-usb-logo img { height: 80px; width: auto; opacity: 0.9; }
+.usb-logo-inline { height: 1.1em; width: auto; vertical-align: middle; margin-left: 0.3rem; }
 .meet-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; }
 .meet-card {
   background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
