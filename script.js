@@ -58,14 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
   );
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-  /* Contact form — opens the user's mail client with the message prefilled */
+  /* Contact form — sends via Formspree */
   const form = document.getElementById('contactForm');
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = form.querySelector('.form-status');
-      const name = form.fullName.value.trim();
-      const email = form.email.value.trim();
+      const name = form.name.value.trim();
+      const email = form._replyto.value.trim();
       const message = form.message.value.trim();
 
       if (!name || !email || !message) {
@@ -73,11 +73,24 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const subject = encodeURIComponent('Contact from stabolut.com — ' + name);
-      const body = encodeURIComponent(message + '\n\n— ' + name + ' (' + email + ')');
-      window.location.href = 'mailto:contact@stabolut.com?subject=' + subject + '&body=' + body;
-      status.textContent = 'Opening your email client…';
-      form.reset();
+      status.textContent = 'Sending…';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          status.textContent = 'Thanks! We\'ll get back to you soon.';
+          form.reset();
+        } else {
+          status.textContent = 'Something went wrong. Please try again or email us directly.';
+        }
+      } catch {
+        status.textContent = 'Network error. Please try again.';
+      }
     });
   }
 });
