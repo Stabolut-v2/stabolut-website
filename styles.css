@@ -130,7 +130,9 @@ h1, h2, h3, h4 {
 .backers { margin-top: 3.5rem; }
 .backers p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.2rem; letter-spacing: 0.02em; }
 .backer-logos { display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; }
-.backer-logos img { height: 34px; width: auto; opacity: 0.8; }
+.backer-logos { display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+.backer-logo-wrapper { display: flex; align-items: center; justify-content: center; width: 180px; }
+.backer-logos img { height: 34px; width: auto; max-height: 34px; opacity: 0.8; }
 
 /* scroll cue */
 .scroll-cue {
