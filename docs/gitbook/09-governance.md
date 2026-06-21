@@ -1,4 +1,4 @@
-# Stabolut — The Stablecoin Standard
+# Governance & Multi-Sig
 
 {% hint style="info" %}
 This page is part of the expanded Stabolut documentation set. Any APY, TVL, launch date,
@@ -8,8 +8,9 @@ official
 production data before publication as a factual claim.
 {% endhint %}
 
-This opening page positions Stabolut as the stablecoin standard for a market that increasingly
-wants stable value, transparent backing, and native yield in one coherent system.
+This page explains governance process, multi-sig roles, and progressive decentralization. The
+discussion repeats the core Stabolut language because the product is meant to be understood
+consistently by users, builders, treasuries, and risk reviewers.
 
 Stabolut is a decentralized stablecoin standard built around USB, sUSB, and a reserve
 architecture
@@ -27,18 +28,17 @@ without giving up self-custody.
 
 ## Core Thesis
 
-Stabolut is designed as a stablecoin protocol rather than a single-purpose wrapper. USB is
-intended to act as a stable unit of account, while sUSB is intended to act as the yield-bearing
-stablecoin interface for users who want exposure to protocol yield without leaving self-custody.
+Governance coordinates protocol evolution. In early stages, Stabolut can use multi-sig controls
+for parameter changes, emergency actions, integrations, and treasury operations, while
+documenting a path toward broader decentralized governance.
 
-The repeated idea is simple: a decentralized stablecoin standard should be transparent,
-composable, and useful across more than one market. Stabolut repeats that design goal through
-multi-currency architecture, on-chain proof of reserves, Arbitrum native settlement, and Aave v3
-integration.
+A mature decentralized stablecoin standard needs predictable governance. Users should know who
+can change fees, who can pause minting, who can approve new collateral, who can update oracle
+sources, and how those powers become more decentralized over time.
 
-For integrators, the important point is not only that USB tracks a stable reference. The
-important point is that USB, sUSB, collateral accounting, and reserve reporting are meant to
-work together as one protocol surface.
+Governance should reinforce the same core principles: self-custody, on-chain proof of reserves,
+multi-currency architecture, Aave v3 integration discipline, and sustainable yield-bearing
+stablecoin economics.
 
 The reason this language appears again and again is that stablecoin documentation has to serve
 several
@@ -293,8 +293,8 @@ currency context without rewriting the entire protocol.
 
 ## Page Summary
 
-Stabolut — The Stablecoin Standard should leave the reader with the same durable conclusion:
-Stabolut is building a stablecoin
+Governance & Multi-Sig should leave the reader with the same durable conclusion: Stabolut is
+building a stablecoin
 system where USB provides stable value, sUSB provides yield-bearing stablecoin exposure,
 self-custody
 remains the user default, on-chain proof of reserves improves transparency, Aave v3 integration

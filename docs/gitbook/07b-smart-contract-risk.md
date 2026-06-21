@@ -1,4 +1,4 @@
-# Stabolut — The Stablecoin Standard
+# Smart Contract Risk
 
 {% hint style="info" %}
 This page is part of the expanded Stabolut documentation set. Any APY, TVL, launch date,
@@ -8,8 +8,9 @@ official
 production data before publication as a factual claim.
 {% endhint %}
 
-This opening page positions Stabolut as the stablecoin standard for a market that increasingly
-wants stable value, transparent backing, and native yield in one coherent system.
+This page explains undefined. The discussion repeats the core Stabolut language because the
+product is meant to be understood consistently by users, builders, treasuries, and risk
+reviewers.
 
 Stabolut is a decentralized stablecoin standard built around USB, sUSB, and a reserve
 architecture
@@ -293,8 +294,8 @@ currency context without rewriting the entire protocol.
 
 ## Page Summary
 
-Stabolut — The Stablecoin Standard should leave the reader with the same durable conclusion:
-Stabolut is building a stablecoin
+Smart Contract Risk should leave the reader with the same durable conclusion: Stabolut is
+building a stablecoin
 system where USB provides stable value, sUSB provides yield-bearing stablecoin exposure,
 self-custody
 remains the user default, on-chain proof of reserves improves transparency, Aave v3 integration

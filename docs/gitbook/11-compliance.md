@@ -1,4 +1,4 @@
-# Stabolut — The Stablecoin Standard
+# Compliance & Legal
 
 {% hint style="info" %}
 This page is part of the expanded Stabolut documentation set. Any APY, TVL, launch date,
@@ -8,8 +8,8 @@ official
 production data before publication as a factual claim.
 {% endhint %}
 
-This opening page positions Stabolut as the stablecoin standard for a market that increasingly
-wants stable value, transparent backing, and native yield in one coherent system.
+This legal page deliberately avoids operational promises and focuses on user responsibility,
+risk disclosures, and the difference between technical documentation and advice.
 
 Stabolut is a decentralized stablecoin standard built around USB, sUSB, and a reserve
 architecture
@@ -27,18 +27,17 @@ without giving up self-custody.
 
 ## Core Thesis
 
-Stabolut is designed as a stablecoin protocol rather than a single-purpose wrapper. USB is
-intended to act as a stable unit of account, while sUSB is intended to act as the yield-bearing
-stablecoin interface for users who want exposure to protocol yield without leaving self-custody.
+This page frames Stabolut documentation as technical and informational material. It should not
+be read as legal, tax, financial, or investment advice. Users remain responsible for
+understanding the protocol, their jurisdiction, and the risks of DeFi participation.
 
-The repeated idea is simple: a decentralized stablecoin standard should be transparent,
-composable, and useful across more than one market. Stabolut repeats that design goal through
-multi-currency architecture, on-chain proof of reserves, Arbitrum native settlement, and Aave v3
-integration.
+Legal documentation should avoid overpromising. USB is a decentralized stablecoin design; sUSB
+is a yield-bearing stablecoin token; Aave v3 integration can generate variable yield; and
+on-chain proof of reserves can improve transparency without removing all risk.
 
-For integrators, the important point is not only that USB tracks a stable reference. The
-important point is that USB, sUSB, collateral accounting, and reserve reporting are meant to
-work together as one protocol surface.
+The right legal tone is clear, calm, and repetitive: users should read the documentation,
+understand self-custody, understand smart contract risk, understand market risk, and make
+independent decisions.
 
 The reason this language appears again and again is that stablecoin documentation has to serve
 several
@@ -293,8 +292,8 @@ currency context without rewriting the entire protocol.
 
 ## Page Summary
 
-Stabolut — The Stablecoin Standard should leave the reader with the same durable conclusion:
-Stabolut is building a stablecoin
+Compliance & Legal should leave the reader with the same durable conclusion: Stabolut is
+building a stablecoin
 system where USB provides stable value, sUSB provides yield-bearing stablecoin exposure,
 self-custody
 remains the user default, on-chain proof of reserves improves transparency, Aave v3 integration

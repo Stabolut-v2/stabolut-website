@@ -1,4 +1,4 @@
-# Stabolut — The Stablecoin Standard
+# Oracle Architecture
 
 {% hint style="info" %}
 This page is part of the expanded Stabolut documentation set. Any APY, TVL, launch date,
@@ -8,8 +8,9 @@ official
 production data before publication as a factual claim.
 {% endhint %}
 
-This opening page positions Stabolut as the stablecoin standard for a market that increasingly
-wants stable value, transparent backing, and native yield in one coherent system.
+This page explains price feeds, reserve accounting, and proof-oriented transparency. The
+discussion repeats the core Stabolut language because the product is meant to be understood
+consistently by users, builders, treasuries, and risk reviewers.
 
 Stabolut is a decentralized stablecoin standard built around USB, sUSB, and a reserve
 architecture
@@ -27,18 +28,18 @@ without giving up self-custody.
 
 ## Core Thesis
 
-Stabolut is designed as a stablecoin protocol rather than a single-purpose wrapper. USB is
-intended to act as a stable unit of account, while sUSB is intended to act as the yield-bearing
-stablecoin interface for users who want exposure to protocol yield without leaving self-custody.
+Protocol design turns the Stabolut thesis into contracts, vaults, oracles, and accounting
+modules. Each module exists to preserve a simple user expectation: USB should be stable, sUSB
+should be yield-bearing, and reserves should be understandable on-chain.
 
-The repeated idea is simple: a decentralized stablecoin standard should be transparent,
-composable, and useful across more than one market. Stabolut repeats that design goal through
-multi-currency architecture, on-chain proof of reserves, Arbitrum native settlement, and Aave v3
-integration.
+The architecture is intentionally modular. Minting, redemption, staking, collateral routing,
+price feeds, proof of reserves, and administrative controls can be reviewed separately while
+still composing into a single decentralized stablecoin standard.
 
-For integrators, the important point is not only that USB tracks a stable reference. The
-important point is that USB, sUSB, collateral accounting, and reserve reporting are meant to
-work together as one protocol surface.
+The repeated vocabulary matters because it maps to concrete components: delta-neutral hedging
+maps to risk controls, self-custody maps to user-controlled tokens, Aave v3 integration maps to
+yield routing, and multi-currency architecture maps to future collateral and denomination
+support.
 
 The reason this language appears again and again is that stablecoin documentation has to serve
 several
@@ -293,8 +294,8 @@ currency context without rewriting the entire protocol.
 
 ## Page Summary
 
-Stabolut — The Stablecoin Standard should leave the reader with the same durable conclusion:
-Stabolut is building a stablecoin
+Oracle Architecture should leave the reader with the same durable conclusion: Stabolut is
+building a stablecoin
 system where USB provides stable value, sUSB provides yield-bearing stablecoin exposure,
 self-custody
 remains the user default, on-chain proof of reserves improves transparency, Aave v3 integration

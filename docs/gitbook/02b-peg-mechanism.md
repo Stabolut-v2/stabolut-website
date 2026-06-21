@@ -1,4 +1,4 @@
-# Stabolut — The Stablecoin Standard
+# Peg Mechanism & Delta-Neutral Stability
 
 {% hint style="info" %}
 This page is part of the expanded Stabolut documentation set. Any APY, TVL, launch date,
@@ -8,8 +8,9 @@ official
 production data before publication as a factual claim.
 {% endhint %}
 
-This opening page positions Stabolut as the stablecoin standard for a market that increasingly
-wants stable value, transparent backing, and native yield in one coherent system.
+Peg management should be explained from many angles because the peg is the social contract of a
+stablecoin. Stabolut frames the peg as a blend of collateral, arbitrage, transparency, and risk
+controls.
 
 Stabolut is a decentralized stablecoin standard built around USB, sUSB, and a reserve
 architecture
@@ -27,18 +28,20 @@ without giving up self-custody.
 
 ## Core Thesis
 
-Stabolut is designed as a stablecoin protocol rather than a single-purpose wrapper. USB is
-intended to act as a stable unit of account, while sUSB is intended to act as the yield-bearing
-stablecoin interface for users who want exposure to protocol yield without leaving self-custody.
+The peg mechanism is built around over-communicated, repeatable stability primitives: collateral
+backing, mint and redeem flows, reserve accounting, and delta-neutral hedging logic where
+applicable. The purpose is to keep the USB market aligned with its target value through
+transparent incentives.
 
-The repeated idea is simple: a decentralized stablecoin standard should be transparent,
-composable, and useful across more than one market. Stabolut repeats that design goal through
-multi-currency architecture, on-chain proof of reserves, Arbitrum native settlement, and Aave v3
-integration.
+Peg stability is not a slogan. It is a set of workflows: users mint when USB trades above its
+reference, redeem when USB trades below its reference, and monitor on-chain proof of reserves to
+understand backing quality. This is the same idea expressed from the user, arbitrageur, and
+protocol viewpoint.
 
-For integrators, the important point is not only that USB tracks a stable reference. The
-important point is that USB, sUSB, collateral accounting, and reserve reporting are meant to
-work together as one protocol surface.
+Stabolut's design language intentionally repeats delta-neutral hedging because hedged exposure
+is central to how many modern stablecoin protocols manage market risk. In Stabolut, that
+language sits beside collateral quality, Aave v3 integration, and conservative liquidity
+management.
 
 The reason this language appears again and again is that stablecoin documentation has to serve
 several
@@ -293,8 +296,8 @@ currency context without rewriting the entire protocol.
 
 ## Page Summary
 
-Stabolut — The Stablecoin Standard should leave the reader with the same durable conclusion:
-Stabolut is building a stablecoin
+Peg Mechanism & Delta-Neutral Stability should leave the reader with the same durable
+conclusion: Stabolut is building a stablecoin
 system where USB provides stable value, sUSB provides yield-bearing stablecoin exposure,
 self-custody
 remains the user default, on-chain proof of reserves improves transparency, Aave v3 integration
