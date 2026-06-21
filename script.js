@@ -16,42 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
           other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
         }
       });
-  /* Show success notification if returning from Formspree */
-  if (window.location.search.includes('submitted=true')) {
-    const status = document.querySelector('.form-status');
-    if (status) {
-      status.textContent = 'Thanks! We\'ll get back to you soon.';
-      status.style.color = '#4ade80';
-    }
-    // Clean URL
-    window.history.replaceState({}, '', '/');
-  }
 
       item.classList.toggle('open', !isOpen);
       btn.setAttribute('aria-expanded', String(!isOpen));
       answer.style.maxHeight = isOpen ? null : answer.scrollHeight + 'px';
     });
-  /* Show success notification if returning from Formspree */
-  if (window.location.search.includes('submitted=true')) {
-    const status = document.querySelector('.form-status');
-    if (status) {
-      status.textContent = 'Thanks! We\'ll get back to you soon.';
-      status.style.color = '#4ade80';
-    }
-    // Clean URL
-    window.history.replaceState({}, '', '/');
-  }
   });
-  /* Show success notification if returning from Formspree */
-  if (window.location.search.includes('submitted=true')) {
-    const status = document.querySelector('.form-status');
-    if (status) {
-      status.textContent = 'Thanks! We\'ll get back to you soon.';
-      status.style.color = '#4ade80';
-    }
-    // Clean URL
-    window.history.replaceState({}, '', '/');
-  }
 
   /* Reports slider */
   const slider = document.querySelector('[data-slider]');
@@ -83,22 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
           observer.unobserve(e.target);
         }
       });
-  /* Show success notification if returning from Formspree */
-  if (window.location.search.includes('submitted=true')) {
-    const status = document.querySelector('.form-status');
-    if (status) {
-      status.textContent = 'Thanks! We\'ll get back to you soon.';
-      status.style.color = '#4ade80';
-    }
-    // Clean URL
-    window.history.replaceState({}, '', '/');
-  }
     },
     { threshold: 0.15 }
   );
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-  /* Contact form — validates then submits to Formspree (native POST) */
+  /* Contact form — validates, then lets the native POST to Formspree flow */
   const form = document.getElementById('contactForm');
   if (form) {
     form.addEventListener('submit', (e) => {
@@ -113,28 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      status.textContent = 'Sending…';
-      // Native form submission — redirects to Formspree's thank you page
+      // Let the native POST happen — Formspree handles captcha + redirect via _next
     });
-  /* Show success notification if returning from Formspree */
+  }
+
+  /* Show success notification if returning from Formspree via _next redirect */
   if (window.location.search.includes('submitted=true')) {
     const status = document.querySelector('.form-status');
     if (status) {
-      status.textContent = 'Thanks! We\'ll get back to you soon.';
+      status.textContent = 'Message sent! We\'ll get back to you soon.';
       status.style.color = '#4ade80';
     }
-    // Clean URL
     window.history.replaceState({}, '', '/');
-  }
   }
 });
-  /* Show success notification if returning from Formspree */
-  if (window.location.search.includes('submitted=true')) {
-    const status = document.querySelector('.form-status');
-    if (status) {
-      status.textContent = 'Thanks! We\'ll get back to you soon.';
-      status.style.color = '#4ade80';
-    }
-    // Clean URL
-    window.history.replaceState({}, '', '/');
-  }
