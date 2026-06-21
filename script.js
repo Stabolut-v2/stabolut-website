@@ -58,39 +58,23 @@ document.addEventListener('DOMContentLoaded', () => {
   );
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-  /* Contact form — sends via Formspree */
+  /* Contact form — validates then submits to Formspree (native POST) */
   const form = document.getElementById('contactForm');
   if (form) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    form.addEventListener('submit', (e) => {
       const status = form.querySelector('.form-status');
       const name = form.name.value.trim();
       const email = form._replyto.value.trim();
       const message = form.message.value.trim();
 
       if (!name || !email || !message) {
+        e.preventDefault();
         status.textContent = 'Please fill in all fields.';
         return;
       }
 
       status.textContent = 'Sending…';
-
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (res.ok) {
-          status.textContent = 'Thanks! We\'ll get back to you soon.';
-          form.reset();
-        } else {
-          status.textContent = 'Something went wrong. Please try again or email us directly.';
-        }
-      } catch {
-        status.textContent = 'Network error. Please try again.';
-      }
+      // Native form submission — redirects to Formspree's thank you page
     });
   }
 });
