@@ -72,7 +72,8 @@ h1, h2, h3, h4 {
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; }
-.logo { font-family: var(--display); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.04em; }
+.logo { display: flex; align-items: center; }
+.logo-img { height: 36px; width: auto; }
 .main-nav { display: flex; align-items: center; gap: 2rem; }
 .main-nav a:not(.btn) { color: var(--text-muted); font-size: 0.92rem; font-weight: 500; transition: color 0.2s; }
 .main-nav a:not(.btn):hover { color: var(--text); }
@@ -152,6 +153,8 @@ h1, h2, h3, h4 {
 
 /* ============ Meet ============ */
 .meet { padding: 8rem 0 3rem; }
+.meet-usb-logo { display: flex; justify-content: flex-start; margin-bottom: 2rem; }
+.meet-usb-logo img { height: 80px; width: auto; opacity: 0.9; }
 .meet-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; }
 .meet-card {
   background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
