@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 40" width="280" height="40">
-  <text x="50%" y="24" dominant-baseline="middle" text-anchor="middle"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 34" width="200" height="34">
+  <text x="50%" y="18" dominant-baseline="middle" text-anchor="middle"
         font-family="'Inter', Arial, Helvetica, sans-serif"
-        font-size="24" font-weight="700"
+        font-size="18" font-weight="700"
         fill="#ffffff"
-        letter-spacing="3">DEXTOOLS</text>
+        letter-spacing="2">DEXTOOLS</text>
 </svg>
