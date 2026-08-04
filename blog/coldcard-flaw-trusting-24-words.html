@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Coldcard Flaw and the Problem With Trusting 24 Words — Stabolut</title>
+<meta name="description" content="A vulnerability in Coldcard's random number generation let attackers reconstruct seeds created years earlier — no malware, no phishing, no physical access. Why 24 words are only as strong as the entropy behind them.">
+<link rel="canonical" href="https://blog.stabolut.com/coldcard-flaw-trusting-24-words">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,-apple-system,sans-serif;background:#0a0a0f;color:#fff;overflow-x:hidden;line-height:1.7}
+a{color:inherit;text-decoration:none}
+.container{max-width:720px;margin:0 auto;padding:0 24px}
+
+/* Nav */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.nav .logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700;letter-spacing:-.5px}
+.nav .logo .grad{background:linear-gradient(135deg,#6c63ff,#00d4aa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav .links{display:flex;gap:24px;font-size:13px;color:rgba(255,255,255,.5)}
+.nav .links a{transition:color .15s}
+.nav .links a:hover{color:#fff}
+.nav .links a.active{color:#fff}
+
+/* Article */
+.article{padding:48px 0 64px}
+.article .back{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,.4);margin-bottom:32px;transition:color .15s}
+.article .back:hover{color:#6c63ff}
+.article .meta{font-size:12px;color:rgba(255,255,255,.3);margin-bottom:8px;display:flex;gap:12px;align-items:center}
+.article .meta .tag{display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#6c63ff}
+.article h1{font-size:36px;font-weight:800;letter-spacing:-1px;line-height:1.2;margin-bottom:24px}
+.article h2{font-size:24px;font-weight:700;letter-spacing:-.5px;margin-top:48px;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06)}
+.article h3{font-size:18px;font-weight:600;margin-top:32px;margin-bottom:12px;color:rgba(255,255,255,.85)}
+.article p{font-size:16px;color:rgba(255,255,255,.7);margin-bottom:20px}
+.article ul,.article ol{padding-left:24px;margin-bottom:20px}
+.article li{font-size:16px;color:rgba(255,255,255,.7);margin-bottom:8px}
+.article strong{color:#fff}
+.article .highlight{background:rgba(108,99,255,.08);border-left:3px solid #6c63ff;padding:20px 24px;border-radius:0 12px 12px 0;margin-bottom:24px}
+.article .highlight p:last-child{margin-bottom:0}
+.article .highlight strong{color:#6c63ff}
+.article table{width:100%;border-collapse:collapse;margin-bottom:24px;font-size:14px}
+.article table th{text-align:left;padding:12px 16px;background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid rgba(255,255,255,.08)}
+.article table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.7)}
+.article table tr:last-child td{border-bottom:none}
+.article .protocol-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.article .protocol-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;transition:border-color .2s}
+.article .protocol-card:hover{border-color:rgba(108,99,255,.4)}
+.article .protocol-card h4{font-size:14px;font-weight:600;margin-bottom:6px}
+.article .protocol-card p{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:0;line-height:1.5}
+
+/* Footer */
+.footer{text-align:center;padding:40px 0;border-top:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.3);font-size:13px}
+.footer a{color:rgba(255,255,255,.5)}
+.footer a:hover{color:#fff}
+
+@media(max-width:640px){
+.article h1{font-size:26px}
+.article .protocol-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<nav class="nav container">
+  <a href="/" class="logo"><span class="grad">Stabolut</span> <span style="color:rgba(255,255,255,.3);font-weight:400">Blog</span></a>
+  <div class="links">
+    <a href="https://stabolut.com">Home</a>
+    <a href="/" class="active">Blog</a>
+  </div>
+</nav>
+
+<article class="article container">
+  <a href="/" class="back">← Back to Blog</a>
+
+  <div class="meta">
+    <span class="tag">Security</span>
+    <span>·</span>
+    <span>August 4, 2026</span>
+    <span>·</span>
+    <span>8 min read</span>
+  </div>
+
+  <h1>The Coldcard Flaw and the Problem With Trusting 24 Words</h1>
+
+  <p>At Stabolut, we have been following what happened with Coldcard quite closely over the past few days. Beyond the figures that have started circulating around the amount of bitcoin stolen, we think this is a particularly interesting case because it says a lot about where some of the real risks are when we talk about self-custody and cryptographic security.</p>
+
+  <p>The first thing that stands out is that this is not the kind of attack we usually imagine when someone loses funds stored on a hardware wallet. There does not appear to have been malware running on the victims' computers, phishing to obtain recovery words, or physical access to the devices in order to extract private keys. In fact, a Coldcard could have been switched off and sitting in a drawer for years while someone elsewhere was still able to reconstruct the keys associated with certain wallets.</p>
+
+  <p>The problem had happened much earlier, at the moment those wallets were created.</p>
+
+  <h2>How a wallet is actually born</h2>
+
+  <p>When we generate a new wallet, the 12 or 24 words we write down do not simply appear out of nowhere. Before getting to that point, the device needs to generate a value with enough randomness. From there, the seed is derived, then the private keys, and eventually all the addresses we are going to use. It is one of those processes we normally take for granted because it happens in a few seconds and, from the user's point of view, all that appears on screen is a list of words.</p>
+
+  <p>In certain versions of the Coldcard firmware, that process was not working as expected.</p>
+
+  <p>After changes were made to the software, one of the calls involved in generating random numbers ended up using a different implementation from the one developers believed it was using. What made the bug difficult to spot is that nothing obviously broke: the code compiled, the wallet was created, the words were valid, and users could receive and send bitcoin normally.</p>
+
+  <p>From the outside, there was no obvious way to distinguish a correctly generated seed from one created with the affected software.</p>
+
+  <h2>24 words don't guarantee 256 bits</h2>
+
+  <p>This is probably one of the most interesting parts of the incident, because we are used to associating a 24-word seed phrase with an enormous amount of security.</p>
+
+  <div class="highlight">
+    <p>We see 24 words and instinctively assume that there are <strong>256 bits of entropy</strong> behind them, but those words are only a representation of a number that was generated earlier in the process.</p>
+  </div>
+
+  <p>If that number comes from a source with poor entropy, converting it into 24 words does not solve the problem.</p>
+
+  <p>Running the value through SHA-256 or another cryptographic function does not magically create the missing randomness either. The output can look perfectly random, but a hash function cannot create possibilities that were not there to begin with.</p>
+
+  <p>If the original input could only take, for example, four billion different values, then after hashing it there are still only four billion possible starting points, even if every resulting output looks indistinguishable from a fully random 256-bit value.</p>
+
+  <h2>How an attacker steals keys without touching the device</h2>
+
+  <p>And this is where it becomes easier to understand how someone can steal funds from a hardware wallet without ever having the device.</p>
+
+  <p>If an attacker understands the behaviour of the faulty generator well enough, they can attempt to reproduce its possible internal states. For each state, they generate a candidate seed, derive the corresponding keys and calculate the Bitcoin addresses associated with them.</p>
+
+  <p>At that point, they have another significant advantage: the Bitcoin blockchain is public.</p>
+
+  <p>They do not need to know in advance who owns a wallet. They can generate candidates and check whether the resulting addresses have ever been used or currently hold funds. The blockchain itself effectively becomes a way of validating whether a reconstructed seed belongs to a wallet that actually exists.</p>
+
+  <p>Once there is a match, the attacker no longer needs the Coldcard, the owner's PIN or access to their computer. They have enough information to derive the private key and sign a transaction.</p>
+
+  <p>It is a fairly unintuitive type of attack because the device that exists today is not really what is being attacked. What is being reconstructed is what happened inside that device, possibly several years earlier, during the few seconds when the original keys were created.</p>
+
+  <h2>The debate: 40 bits, 32 bits, or worse</h2>
+
+  <p>From there, the technical discussion around how much entropy was actually left in the affected versions becomes more complicated.</p>
+
+  <p>Coinkite and Block do not interpret the situation in exactly the same way.</p>
+
+  <p>For some older models, Coinkite estimates an effective search space of around 40 bits. Block presents a considerably more concerning view and argues that, under certain conditions, once some internal values are known or sufficiently constrained, parts of the process may have been far more predictable than that figure suggests.</p>
+
+  <p>Later generations of Coldcard introduced additional entropy from Secure Elements, but another relevant detail appears there: part of that entropy was reduced to four bytes before being used to reseed the generator.</p>
+
+  <p>Four bytes means 32 bits, or just over 4.29 billion possible values.</p>
+
+  <p>That does not mean every affected wallet can simply be attacked by iterating through four billion possibilities. Other factors are involved, including timers, device identifiers, internal generator state and additional variables, which is precisely why the different technical analyses do not arrive at exactly the same effective search space.</p>
+
+  <p>Still, we think focusing too heavily on whether the final number is exactly 32, 40 or 72 bits risks missing the main issue. The security expected from those seeds was much higher and, once a serious weakness in the generation process has been demonstrated, continuing to keep funds on them no longer makes much sense.</p>
+
+  <h2>Updating the firmware doesn't fix old seeds</h2>
+
+  <p>There is also a very practical point worth clarifying: updating the firmware does not fix a seed that was already generated using a vulnerable version.</p>
+
+  <p>The update fixes the way the device will generate new keys from that point onwards, but it cannot change how the words you already have were created.</p>
+
+  <p>Importing the same 24 words into another hardware wallet does not solve the problem either.</p>
+
+  <p>Moving a vulnerable seed from a Coldcard to a Ledger, Trezor, SeedSigner or any other device does not change where that seed came from. The keys remain exactly the same.</p>
+
+  <p>In those cases, the real solution is to generate new keys using a proper source of entropy and move the funds to new addresses.</p>
+
+  <h2>What actually changes the risk</h2>
+
+  <p>There are, of course, some situations that can change the level of risk significantly.</p>
+
+  <p>Coldcard allows users to add their own entropy using dice rolls. Someone who used enough independent rolls when originally creating the wallet introduced a source of randomness that did not depend on the device's faulty generator.</p>
+
+  <p>BIP-39 passphrases can also add an important independent barrier, particularly when they are genuinely random, sufficiently long and not reused anywhere else. A properly generated passphrase is obviously very different from a conventional password or a word that can be guessed.</p>
+
+  <p>The multisig case is perhaps even more interesting because it highlights the difference between having multiple devices and having genuinely independent sources of security.</p>
+
+  <p>A 2-of-3 setup where the keys come from different manufacturers, different devices and different generation processes can tolerate one compromised key.</p>
+
+  <p>But if a multisig setup uses three identical devices, all three seeds were created under the same vulnerable firmware, and we assume that having three devices automatically removes the risk, then there is still a common-cause failure sitting underneath the architecture.</p>
+
+  <div class="highlight">
+    <p><strong>Physical redundancy does not always mean actual independence.</strong></p>
+  </div>
+
+  <h2>"Don't Trust, Verify" — and open source</h2>
+
+  <p>There is another uncomfortable aspect to this incident because of the kind of product Coldcard is.</p>
+
+  <p>For years, Coldcard has built much of its reputation around advanced self-custody, air-gapped workflows, PSBTs, Secure Elements, the ability to add your own entropy and, above all, the "Don't Trust, Verify" philosophy.</p>
+
+  <p>The software was also available for public review.</p>
+
+  <p>But open source means a system can be audited. It does not mean it has necessarily been audited deeply enough across every critical flow.</p>
+
+  <p>Based on what we know so far, this flaw does not appear to have required breaking a cryptographic algorithm or discovering some particularly sophisticated mathematical weakness. One part of the implementation expected randomness from one source and, because of the way several pieces of software interacted, ended up getting it from another.</p>
+
+  <p>Everything else continued working around that mistake.</p>
+
+  <p>And that apparent normality is probably one of the reasons the problem was able to remain undetected for so long.</p>
+
+  <h2>Bitcoin didn't fail — the implementation did</h2>
+
+  <p>For us, that is one of the most important parts of the story.</p>
+
+  <p>Bitcoin did not fail.</p>
+
+  <p>SHA-256 did not fail.</p>
+
+  <p>BIP-39 did not fail either.</p>
+
+  <p>And we do not think it makes sense to turn this incident into a general conclusion that hardware wallets are unsafe.</p>
+
+  <div class="highlight">
+    <p><strong>Something far more familiar in engineering failed: the implementation.</strong></p>
+  </div>
+
+  <p>When we work with cryptographic systems, we tend to spend a lot of time talking about algorithms, signatures, hashes, Secure Elements, hardware isolation and key lengths. But all of that security ultimately depends on the different pieces being connected exactly the way we think they are.</p>
+
+  <p>You can build a system on top of very strong cryptographic primitives and still lose much of those guarantees because a library ends up calling a different function, because a few bytes are truncated where they should not be, or because nobody verifies the complete path from the physical source of randomness to the final key used by the user.</p>
+
+  <p>Those kinds of mistakes, far more than the sudden collapse of the underlying mathematics, remain one of the real problems in cryptographic security.</p>
+</article>
+
+<footer class="footer container">
+  <p>© 2026 <a href="https://stabolut.com">Stabolut</a>. All rights reserved.</p>
+</footer>
+</body>
+</html>
